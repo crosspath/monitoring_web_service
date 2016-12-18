@@ -1,0 +1,52 @@
+$main-font: "CirceRegular";
+$main-fontBold: "CirceBold";
+$main-fontLight: "CirceLight";
+
+// Bootstrap settings
+$grid-columns: 48;
+$grid-gutter-width: 30px;
+$container-large-desktop: ((1120px + $grid-gutter-width));
+$container-desktop: $container-large-desktop;
+$screen-md: 600px; // временный фикс для маленьких дисплеев
+$navbar-border-radius: 0;
+$link-color: #020202;
+$link-hover-color: #020202;
+$font-size-base: 14px;
+
+$font-size-h1: floor(($font-size-base * 2.3));
+$font-size-h2: floor(($font-size-base  * 1.9));
+$font-size-h3: floor(($font-size-base * 1.6));
+$font-size-h4: ceil(($font-size-base * 1.25));
+
+$font-family-sans-serif: "CirceLight";
+$text-color: #000;
+$navbar-default-link-color: #000;
+$navbar-default-link-hover-color: #000;
+$nav-link-hover-bg: transparent;
+
+$dropdown-link-hover-bg: #fafafa;
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+// COLORS
+$grey-super-light: #f2f2f2;
+$grey: #b3b3b3;
+$grey-light: #e6e6e6;
+$grey-medium: #4c4c4c;
+$grey-normal: #999999;
+$grey3: #333333;
+$grey6: #666666;
+
+$orange: #ffdd3f;
+
+$yellow: #c7d61a;
+$yellow-dark: #ffd50f;
+
+$blue-alt-light: #6ccded;
+$blue-light: #47c1e8;
+$blue-nav: #88d8f7;
+$pink: #aa63a5;
+
+$app-red: #f2b6b6;
+$app-green: #e0e880;

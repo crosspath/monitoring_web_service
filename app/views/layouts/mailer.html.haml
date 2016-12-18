@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title -
+  %body{:style => "padding:0px;margin:0px;"}
+    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+      %tr
+        %td{:bgcolor => "#a0e0f9", :align => "center"}
+          = @title
+      %tr
+        %td{:bgcolor => "#ffffff", :align => "center"}
+          %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "width:800px;", :width => "800"}
+            = yield
+            %tr
+              %td{:bgcolor => "#e6e6e6"}
+                %div{:style => "height:1px"}
+            %tr{:align => "center"}
+              %td
+                = Time.now

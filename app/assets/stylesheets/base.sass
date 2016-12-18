@@ -1,0 +1,162 @@
+@import "variables"
+@import "mixins"
+
+
+@font-face
+  font-family: 'CirceRegular'
+  src: asset-url('Circe-Regular.eot')
+  src: asset-url('Circe-Regular.eot?#iefix') format('embedded-opentype'), asset-url('Circe-Regular.woff') format('woff'), asset-url('Circe-Regular.ttf') format('truetype'), asset-url('Circe-Regular.svg') format('svg')
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'CirceBold'
+  src: asset-url('Circe-Bold.eot')
+  src: asset-url('Circe-Bold.eot?#iefix') format('embedded-opentype'), asset-url('Circe-Bold.woff') format('woff'), asset-url('Circe-Bold.ttf') format('truetype'), asset-url('Circe-Bold.svg') format('svg')
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'CirceLight'
+  src: asset-url('Circe-Light.eot')
+  src: asset-url('Circe-Light.eot?#iefix') format('embedded-opentype'), asset-url('Circe-Light.woff') format('woff'), asset-url('Circe-Light.ttf') format('truetype'), asset-url('Circe-Light.svg') format('svg')
+  font-weight: normal
+  font-style: normal
+
+// MEDIA QUERIES
+
+.container
+  @media (min-width: 1440px)
+    width: 1360px
+
+html
+  position: relative
+  min-height: 100%
+  min-width: 1280px
+body
+  overflow-y: scroll
+  margin-bottom: 60px
+h1, h2, h3, h4, h5, h6
+  font-family: $main-font
+a
+  text-decoration: none
+  color: #000
+
+  &:hover, &:focus
+    outline: none
+    text-decoration: none
+    color: #000
+.btn:focus, .btn:active:focus
+  outline: none
+
+.grey-link
+  +link($grey-normal, #000000, underline, underline)
+.blue-link
+  +link($blue-light, $blue-light, none, underline)
+.center
+  text-align: center
+.fright
+  float: right
+.fleft
+  float: left
+
+// BUTTON STYLE
+
+.btn-black
+  +btn-create()
+
+.btn-blue
+  +btn-create($color-bg: $blue-light)
+.btn-grey
+  +btn-create($color-bg: $grey)
+
+// FORM STYLE
+
+.form-group
+  &.overflow
+    overflow: hidden
+  .form-control
+    color: #000
+    box-shadow: none
+    font-size: 16px
+    border-radius: 0
+    &.form-title
+      height: auto
+      font: 26px $main-fontBold
+    &.form-editor
+      margin-bottom: 30px
+  label.error
+    font-size: 14px
+    color: red
+    margin-top: 5px
+  textarea.form-control
+    resize: vertical
+  input.btn-blue
+    @extend .btn-blue
+  input, textarea, select
+    border-color: $grey-light
+    &:focus
+      border-color: $blue-light
+
+.heartbeat-page__header
+  @extend .center
+  font-family: $main-fontLight
+  margin-top: 50px
+  margin-bottom: 85px
+.services
+  @extend .row
+  margin-bottom: 30px
+  text-align: center
+  .services__item
+    // @extend .col-lg-8, .col-md-8 - не найдены
+    text-align: center
+    margin-bottom: 50px
+    display: inline-block
+    width: 265px
+    margin-right: 10px
+  .services__status-img
+    width: 70px
+    height: 70px
+    display: inline-block
+    background: image-url('status-sprite.png') no-repeat
+    &.services__status-img_available_yes
+      background-position: 0 0
+    &.services__status-img_available_no
+      background-position: -71px 0
+  .services__name
+    font: 22px/25px $main-font
+    margin-top: 35px
+    height: 75px
+
+.services-messages
+  @extend .row
+  font-size: 16px
+  margin-bottom: 50px
+  .services-messages__header
+    @extend .center
+    font-family: $main-fontLight
+    margin-bottom: 60px
+  .services-messages__item
+    @extend .col-lg-48, .col-md-48
+
+  .services-messages__title
+    margin-top: 25px
+    margin-bottom: 15px
+
+  .services-messages__item_message_no
+    text-align: center
+    p
+      margin: 0
+
+  .services-messages__item_message_yes
+    border-bottom: 1px solid $grey-light
+
+  .services-messages__date
+    color: $grey-normal
+    margin: 20px 0
+
+.email-link
+  font-family: $main-font
+  color: $blue-light
+  &:hover
+    color: $blue-light

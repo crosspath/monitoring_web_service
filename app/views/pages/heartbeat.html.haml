@@ -1,0 +1,25 @@
+.heartbeat-page.container
+  %h1.heartbeat-page__header= t(".heartbeat_header", "Сетевая доступность серверов, сервисов и подсистем портала")
+  .services
+    - @specs.each do |_, spec|
+      .services__item
+        .services__status-img{class: "services__status-img_available_#{spec['%'] == 100 ? 'yes' : 'no'}"}
+        .services__name= spec['name']
+        .services__status-text
+          - if spec['%'] == 0
+            Работа приостановлена
+          - elsif spec['%'].nil?
+            Нет данных
+          - else
+            = "Работает на #{spec['%']}%"
+  .services-messages
+    %h2.services-messages__header= t(".errors_message", "Сообщения о неполадках")
+
+    - if @news.present?
+      - @news.each do |news|
+        = render partial: 'news/news', locals: {news: news}
+
+    - else
+      -#Если нет сообщений
+      .services-messages__item.services-messages__item_message_no
+        %p В настоящие время сообщения о неполадках отсутствуют.

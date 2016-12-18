@@ -1,0 +1,47 @@
+require File.expand_path('../boot', __FILE__)
+
+# Pick the frameworks you want:
+# require "active_model/railtie"
+# require "active_record/railtie"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "action_view/railtie"
+require "sprockets/railtie"
+# require "rails/test_unit/railtie"
+
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
+
+def __set_config_from_yaml(file)
+  c = YAML.load(File.read(file))
+  c.merge! c.fetch(Rails.env, {})
+  c.symbolize_keys!
+end
+
+# application config initialization ../config/application.yml
+CONFIG = __set_config_from_yaml(File.expand_path('../application.yml', __FILE__))
+ADMINS = __set_config_from_yaml(File.expand_path('../admins.yml', __FILE__))
+REDIS = __set_config_from_yaml(File.expand_path('../redis.yml', __FILE__))
+
+module MonitoringWebService
+  class Application < Rails::Application
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration should go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded.
+
+    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
+    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
+    # config.time_zone = 'Central Time (US & Canada)'
+    config.time_zone = 'Moscow'
+
+    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
+    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.available_locales = [:ru, :ar, :de, :en, :es, :fr, :hi, :pt, 'zh-CN']
+    config.i18n.default_locale = :ru
+
+    # config.autoload_paths += Dir[Rails.root.join('lib')]
+    config.autoload_paths += [Rails.root.join('lib').to_s]
+    config.i18n.fallbacks = true
+  end
+end

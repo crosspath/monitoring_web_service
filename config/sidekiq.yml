@@ -1,0 +1,5 @@
+:concurrency: 7
+:queues:
+  - [high, 7]
+  - [default, 5]
+  - [raw_file_cleaner_queue, 5]

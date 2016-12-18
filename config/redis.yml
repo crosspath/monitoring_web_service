@@ -1,0 +1,14 @@
+development: &defaults
+  :sidekiq:
+    :url: 'redis://10.0.1.2:6379'
+    :namespace: "status"
+
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults

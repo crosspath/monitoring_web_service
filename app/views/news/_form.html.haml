@@ -1,0 +1,12 @@
+- news ||= {}
+- new_record = news.present?
+= form_tag new_record ? news_path(@id) : news_index_path, method: new_record ? 'patch' : 'post' do
+  %p Title
+  %p= text_field_tag 'news[title]', news['title']
+  %p Content
+  %p= text_area_tag 'news[content]', news['content'] || '', size: '50x8'
+  %p Date
+  %p= datetime_field_tag 'news[date]', news['date']
+  :javascript
+    $('#news_date').datetimepicker();
+  %p= submit_tag new_record ? 'Update' : 'Create'

@@ -1,0 +1,11 @@
+development: &defaults
+  :emails: ["your@email.org"]
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -1,0 +1,32 @@
+=btn-create($style: normal, $color: #000, $color-bg: #000, $border-size: 2px, $border-radius: 3px, $bg-color: transparent, $font-family: $main-fontBold)
+
+  border-radius: $border-radius
+  background-color: $bg-color
+  color: $color
+  border: $border-size solid $color-bg
+  font-family: $font-family
+  &.disabled
+    opacity: 1
+    color: $grey
+    border-color: $grey
+  @if $style == "normal"
+    padding: 6px 28px
+    &:hover
+      background-color: $color-bg
+      color: #fff
+      box-shadow: none
+  @else if $style == "small"
+    padding: 1px 8px
+    &:hover, &.active
+      background-color: $color-bg
+      color: #fff
+      box-shadow: none
+  @else if $style == "small-no-hover"
+    padding: 1px 8px
+
+=link($color, $hover-color, $decoration, $hover-decoration)
+  color: $color
+  text-decoration: $decoration
+  &:hover
+    color: $hover-color
+    text-decoration: $hover-decoration

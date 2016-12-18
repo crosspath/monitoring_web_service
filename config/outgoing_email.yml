@@ -1,0 +1,19 @@
+development: &defaults
+    :address: "smtp.mandrillapp.com"
+    :port: "587"
+    :user_name: "donotreply@email.org"
+    :password: "your_real_password"
+    :authentication: :plain # plain, login, or cram_md5
+    :domain: "localhost"
+    :outgoing_address: "any@email.ru"
+    :default_name: "Monitoring Test"
+    :enable_starttls_auto: true
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults
