@@ -1,15 +1,11 @@
 class NewsController < ApplicationController
   http_basic_authenticate_with :name => CONFIG[:auth_user], :password => CONFIG[:auth_password]
 
-  before_filter do
-    @redis = Redis.new(url: REDIS[:url], namespace: REDIS[:namespace])
-  end
-  before_filter do
-    @id = params[:id]
-  end
-  before_filter -> { @news = load_news }, only: :index
-  before_filter -> { @news = load_a_news(@id) }, only: %i[show edit]
-  before_filter -> { @news = news_params }, only: %i[create update]
+  before_action :connect_redis
+  before_action -> { @id = params[:id] }
+  before_action -> { @news = load_news }, only: :index
+  before_action -> { @news = load_a_news(@id) }, only: %i[show edit]
+  before_action -> { @news = news_params }, only: %i[create update]
 
   def index
   end

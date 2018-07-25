@@ -3,7 +3,7 @@ class Spec
 
   def initialize(file, options = {})
     @options = {redis: true, domain: {}}.merge options
-    @redis = @options[:redis] && Redis.new(url: REDIS[:url], namespace: REDIS[:namespace])
+    @redis = @options[:redis] && RedisFacade.connect
     @spec_file = file.sub "#{Rails.root}/", ''
     @domains = []
     instance_eval(File.read(file))

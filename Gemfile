@@ -10,8 +10,6 @@ gem 'httparty'
 gem 'redis'
 gem 'redcarpet'
 
-gem 'sanitize' # do we need it?
-
 group :development do
     gem 'better_errors'
     gem 'binding_of_caller'

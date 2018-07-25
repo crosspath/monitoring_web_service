@@ -1,6 +1,4 @@
 module ApplicationHelper
-  include NewsHelper
-
   def markdown(text)
     options = { link_attributes: { rel: 'nofollow', target: '_blank' }, hard_wrap: true }
     extensions = { autolink: true }

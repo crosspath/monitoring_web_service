@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
+  before_action :connect_redis
+  
   def heartbeat
-    @redis = Redis.new(url: REDIS[:url], namespace: REDIS[:namespace])
     results = @redis.keys('results~*').sort.map { |x| [x, @redis.get(x)] }
     @specs = {}
 

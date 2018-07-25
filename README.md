@@ -6,7 +6,7 @@
 
 Желательно перенаправить stdout в лог-файл. Пример: ```rails r 'HttpRequests.new.perform' &> log/status.log```.
 
-Шаблон письма: <http://localhost:5000/rails/mailers/status_mail (если запущено на 5000)>.
+Шаблон письма: <http://localhost:5000/rails/mailers/status_mail> (если запущено на 5000).
 
 Кого уведомлять об изменении работы сервисов, указано в файле ```config/admins.yml```.
 
