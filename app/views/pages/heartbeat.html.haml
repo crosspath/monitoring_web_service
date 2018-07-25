@@ -1,5 +1,5 @@
 .heartbeat-page.container
-  %h1.heartbeat-page__header= t(".heartbeat_header", "Сетевая доступность серверов, сервисов и подсистем портала")
+  %h1.heartbeat-page__header= t(".heartbeat_header", default: "Сетевая доступность серверов, сервисов и подсистем портала")
   .services
     - @specs.each do |_, spec|
       .services__item
@@ -13,7 +13,7 @@
           - else
             = "Работает на #{spec['%']}%"
   .services-messages
-    %h2.services-messages__header= t(".errors_message", "Сообщения о неполадках")
+    %h2.services-messages__header= t(".errors_message", default: "Сообщения о неполадках")
 
     - if @news.present?
       - @news.each do |news|
