@@ -1,7 +1,5 @@
 development: &defaults
-  default_url: 'localhost:5000'
-  locale_app_polling_environments: 'production'
-  locale_app_sending_environments: 'production'
+  default_url: 'localhost:3000'
   auth_user: admin
   auth_password: password
 

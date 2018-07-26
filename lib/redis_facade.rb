@@ -1,7 +1,12 @@
+require_relative 'config_store'
+
 module RedisFacade
-  module_function
-  
-  def connect
-    Redis.new(url: REDIS[:url], namespace: REDIS[:namespace])
+  class << self
+    def connect
+      @redis_instance ||= begin
+        params = ConfigStore.config[:redis][:sidekiq]
+        Redis.new(url: params[:url], namespace: params[:namespace])
+      end
+    end
   end
 end

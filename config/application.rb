@@ -13,17 +13,6 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-def __set_config_from_yaml(file)
-  c = YAML.load(File.read(file))
-  c.merge! c.fetch(Rails.env, {})
-  c.symbolize_keys!
-end
-
-# application config initialization ../config/application.yml
-CONFIG = __set_config_from_yaml(File.expand_path('../application.yml', __FILE__))
-ADMINS = __set_config_from_yaml(File.expand_path('../admins.yml', __FILE__))
-REDIS = __set_config_from_yaml(File.expand_path('../redis.yml', __FILE__))
-
 module MonitoringWebService
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -45,3 +34,11 @@ module MonitoringWebService
     config.i18n.fallbacks = true
   end
 end
+
+require_relative '../lib/config_store'
+
+ConfigStore.load(
+  app:    File.expand_path('../application.yml', __FILE__),
+  admins: File.expand_path('../admins.yml', __FILE__),
+  redis:  File.expand_path('../redis.yml', __FILE__)
+)

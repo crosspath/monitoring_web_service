@@ -3,6 +3,6 @@ class MailerPreview < ActionMailer::Preview
     fake_domain = Struct.new(:domain, :failed_tests, :passed_tests)
     t = {url: '%url%', message: '%message%', code: '%code%'}
     domain = fake_domain.new('%domain%', [t, t], [t, t, t])
-    UserMailer.status_mail(domain, ADMINS[:emails])
+    UserMailer.status_mail(domain, ConfigStore.config[:admins][:emails])
   end
 end

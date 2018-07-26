@@ -1,5 +1,6 @@
 class NewsController < ApplicationController
-  http_basic_authenticate_with :name => CONFIG[:auth_user], :password => CONFIG[:auth_password]
+  http_basic_authenticate_with :name => ConfigStore.config[:app][:auth_user],
+      :password => ConfigStore.config[:app][:auth_password]
 
   before_action :connect_redis
   before_action -> { @id = params[:id] }
@@ -22,7 +23,7 @@ class NewsController < ApplicationController
 
   def create
     create_news(@news)
-    redirect_to news_path(1)
+    redirect_to news_path(0)
   end
 
   def update

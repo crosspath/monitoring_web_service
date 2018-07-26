@@ -4,5 +4,7 @@
   %pre= markdown news['content']
   .services-messages__date= news['date']
   - if admin
+    = link_to 'show', news_path(news['index'])
     = link_to 'edit', edit_news_path(news['index'])
-    = link_to 'delete', news_path(news['index']), method: :delete
+    = form_tag news_path(news['index']), method: :delete, style: 'display: inline-block' do
+      = link_to 'delete', '#', onclick: 'this.parentNode.submit();return !1;'

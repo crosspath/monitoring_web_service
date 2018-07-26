@@ -11,7 +11,11 @@ gem 'redis'
 gem 'redcarpet'
 
 group :development do
-    gem 'better_errors'
-    gem 'binding_of_caller'
-    gem 'spring'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'spring'
+end
+
+group :test do
+  gem 'rspec'
 end

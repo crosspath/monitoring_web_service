@@ -29,7 +29,7 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
-  config.action_mailer.default_url_options = { host: CONFIG[:default_url] }
+  config.action_mailer.default_url_options = { host: ConfigStore.config[:app][:default_url] }
   #
   config.action_mailer.delivery_method = :file
   #
