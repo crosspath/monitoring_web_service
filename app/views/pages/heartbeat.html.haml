@@ -1,17 +1,18 @@
 .heartbeat-page.container
   %h1.heartbeat-page__header= t(".heartbeat_header", default: "Сетевая доступность серверов, сервисов и подсистем портала")
   .services
-    - @specs.each do |_, spec|
+    - @specs.each do |result|
+      - percent = result.percent
       .services__item
-        .services__status-img{class: "services__status-img_available_#{spec['%'] == 100 ? 'yes' : 'no'}"}
-        .services__name= spec['name']
+        .services__status-img{class: "services__status-img_available_#{percent == 100 ? 'yes' : 'no'}"}
+        .services__name= result.name
         .services__status-text
-          - if spec['%'] == 0
+          - if percent == 0
             Работа приостановлена
-          - elsif spec['%'].nil?
+          - elsif percent.nil?
             Нет данных
           - else
-            = "Работает на #{spec['%']}%"
+            = "Работает на #{percent}%"
   .services-messages
     %h2.services-messages__header= t(".errors_message", default: "Сообщения о неполадках")
 

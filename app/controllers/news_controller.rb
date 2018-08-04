@@ -2,17 +2,16 @@ class NewsController < ApplicationController
   http_basic_authenticate_with :name => Rails.configuration.app[:auth_user],
       :password => Rails.configuration.app[:auth_password]
 
-  before_action :connect_redis
   before_action -> { @id = params[:id] }
-  before_action -> { @news = load_news }, only: :index
-  before_action -> { @news = load_a_news(@id) }, only: %i[show edit]
-  before_action -> { @news = news_params }, only: %i[create update]
+  before_action -> { @news = NewsRepo.load_news }, only: :index
+  before_action -> { @news = NewsRepo.load_a_news(@id) }, only: %i[show edit]
+  before_action -> { @news = News.new(news_params.merge(id: @id)) }, only: %i[create update]
+  before_action -> { @news = News.new(id: @id) }, only: :destroy
 
   def index
   end
 
   def show
-    @news['index'] = @id
   end
 
   def edit
@@ -22,17 +21,17 @@ class NewsController < ApplicationController
   end
 
   def create
-    create_news(@news)
+    @news.save
     redirect_to news_path(0)
   end
 
   def update
-    update_news(@news, @id)
+    @news.save
     redirect_to news_path(@id)
   end
 
   def destroy
-    delete_news(@id)
+    @news.destroy
     redirect_to news_index_path
   end
 

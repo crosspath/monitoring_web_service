@@ -1,0 +1,10 @@
+development: &defaults
+  # Define your specs there!
+  # any_spec: 'Title' # file 'app/specs/any_spec.rb'
+  root_domain_spec: 'Портал'
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

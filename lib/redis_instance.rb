@@ -1,6 +1,4 @@
-require_relative 'config_store'
-
-module RedisFacade
+module RedisInstance
   class << self
     def connect
       @redis_instance ||= begin

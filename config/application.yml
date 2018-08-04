@@ -1,7 +1,7 @@
 development: &defaults
-  default_url: 'localhost:3000'
-  auth_user: admin
-  auth_password: password
+  :default_url: 'localhost:3000'
+  :auth_user: admin
+  :auth_password: password
 
 test:
   <<: *defaults

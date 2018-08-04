@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
-# require "active_model/railtie"
+require "active_model/railtie"
 # require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
@@ -37,5 +37,6 @@ module MonitoringWebService
     config.app    = config_for :application
     config.admins = config_for :admins
     config.redis  = config_for :redis
+    config.specs  = config_for :specs
   end
 end
