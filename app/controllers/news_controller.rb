@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
-  http_basic_authenticate_with :name => ConfigStore.config[:app][:auth_user],
-      :password => ConfigStore.config[:app][:auth_password]
+  http_basic_authenticate_with :name => Rails.configuration.app[:auth_user],
+      :password => Rails.configuration.app[:auth_password]
 
   before_action :connect_redis
   before_action -> { @id = params[:id] }

@@ -57,7 +57,7 @@ class Spec
 
       unless results == new_results
         self.cached_results = new_results
-        UserMailer.status_mail(self, ConfigStore.config[:admins][:emails]).deliver if @options[:send_mails]
+        UserMailer.status_mail(self, Rails.configuration.admins[:emails]).deliver if @options[:send_mails]
       end
     end
 

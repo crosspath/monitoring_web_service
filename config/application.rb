@@ -32,13 +32,10 @@ module MonitoringWebService
     # config.autoload_paths += Dir[Rails.root.join('lib')]
     config.autoload_paths += [Rails.root.join('lib').to_s]
     config.i18n.fallbacks = true
+    
+    # custom configs
+    config.app    = config_for :application
+    config.admins = config_for :admins
+    config.redis  = config_for :redis
   end
 end
-
-require_relative '../lib/config_store'
-
-ConfigStore.load(
-  app:    File.expand_path('../application.yml', __FILE__),
-  admins: File.expand_path('../admins.yml', __FILE__),
-  redis:  File.expand_path('../redis.yml', __FILE__)
-)
