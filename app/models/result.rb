@@ -7,10 +7,10 @@ class Result
     passed_count = (@passed_tests || []).size
     
     sum = failed_count + passed_count
-    sum == 0 ? nil : (100 * passed_count.size / sum)
+    sum == 0 ? nil : (100 * passed_count / sum)
   end
   
-  def add(**attrs)
+  def add(attrs = {})
     attrs.symbolize_keys!
     
     @failed_tests = [] unless @failed_tests.respond_to?('+=')
