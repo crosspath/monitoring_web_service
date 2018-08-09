@@ -9,9 +9,12 @@ class Spec
     instance_eval(File.read(file))
   end
 
+  # For DSL
   def domain(url, &block)
     key = "results~#{@spec_file}~#{url}"
-    @domains << {domain: Spec::Domain.new(url, @redis, {redis_key: key}.merge(@options[:domain])), block: block}
+    options = {redis_key: key}.merge(@options[:domain])
+    spec_domain = Spec::Domain.new(url, @redis, options)
+    @domains << {domain: spec_domain, block: block}
   end
 
   def run
@@ -57,7 +60,10 @@ class Spec
 
       unless results == new_results
         self.cached_results = new_results
-        UserMailer.status_mail(self, Rails.configuration.admins[:emails]).deliver if @options[:send_mails]
+        if @options[:send_mails]
+          emails = Rails.configuration.admins[:emails]
+          UserMailer.status_mail(self, emails).deliver
+        end
       end
     end
 
@@ -98,6 +104,8 @@ class Spec
       score == 0
     end
 
+    # For DSL
+    
     def visit(url, func = nil)
       request(url, func) { |url, options| HTTParty.get(url, options) }
     end
