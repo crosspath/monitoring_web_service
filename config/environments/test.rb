@@ -39,6 +39,5 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: Rails.configuration.app[:default_url] }
 
-  config.action_mailer.delivery_method = :test
   config.i18n.fallbacks = true
 end

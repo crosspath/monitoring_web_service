@@ -1,10 +1,10 @@
 module RedisInstance
   class << self
     def connect
-      @redis_instance ||= begin
-        params = Rails.configuration.redis[:sidekiq]
-        Redis.new(url: params[:url], namespace: params[:namespace])
-      end
+      @redis_instance ||= Redis.new(
+        url:       ENV['REDIS_URL'],
+        namespace: ENV['REDIS_NAMESPACE']
+      )
     end
   end
 end

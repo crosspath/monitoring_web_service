@@ -13,9 +13,6 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # false = Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -29,12 +26,7 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
-  config.action_mailer.default_url_options = { host: Rails.configuration.app[:default_url] }
-  #
-  config.action_mailer.delivery_method = :file
-  #
-  config.action_mailer.smtp_settings = YAML.load_file(Rails.root.join("config", "outgoing_email.yml"))[Rails.env]
-  config.action_mailer.default_options = {from: config.action_mailer.smtp_settings[:outgoing_address]}
+  config.action_mailer.perform_deliveries = false
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

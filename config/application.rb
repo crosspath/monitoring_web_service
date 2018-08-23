@@ -35,7 +35,7 @@ module MonitoringWebService
     
     # custom configs
     config.app    = config_for :application
-    config.admins = config_for :admins
+    config.admins = {emails: ENV['ADMIN_EMAILS'].split(';').map(&:strip)}
     config.redis  = config_for :redis
     config.specs  = config_for :specs
   end

@@ -73,12 +73,23 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_mailer.default_url_options = { host: Rails.configuration.app[:default_url]  }
+  config.action_mailer.default_url_options = {host: ENV['DOMAIN_NAME']}
 
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.smtp_settings = YAML.load_file(Rails.root.join("config", "outgoing_email.yml"))[Rails.env]
-  config.action_mailer.default_options = {from: config.action_mailer.smtp_settings[:outgoing_address]}
+  config.action_mailer.smtp_settings = {
+    user_name:            ENV['SENDGRID_USERNAME'],
+    password:             ENV['SENDGRID_PASSWORD'],
+    domain:               ENV['DOMAIN_NAME'],
+    address:              'smtp.sendgrid.net',
+    port:                 587,
+    authentication:       :plain,
+    enable_starttls_auto: true
+  }
+
+  config.action_mailer.default_options = {
+    from: config.action_mailer.smtp_settings[:outgoing_address]
+  }
 
   config.action_mailer.asset_host = "localhost"
 

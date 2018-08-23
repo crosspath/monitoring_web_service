@@ -13,6 +13,7 @@ class HttpRequests
         spec.run
       rescue => e
         puts "!!! #{File.basename(file)} #{e.message}"
+        puts e.backtrace
       end
     end
   end

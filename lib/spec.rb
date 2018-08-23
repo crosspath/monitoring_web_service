@@ -132,11 +132,12 @@ class Spec
       login_url = options[:login_url]
       cred = options[:credentials]
 
-      visit(form_url)
-      token = @response.body.match(RE_TOKEN)
-      token_value = token['token']
+      if visit(form_url)
+        token = @response.body.match(RE_TOKEN)
+        token_value = token['token']
 
-      send_form(login_url, cred.merge(authenticity_token: token_value))
+        send_form(login_url, cred.merge(authenticity_token: token_value))
+      end
     end
   end
 end
