@@ -83,9 +83,7 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  config.action_mailer.default_options = {
-    from: config.action_mailer.smtp_settings[:outgoing_address]
-  }
+  config.action_mailer.default_options = {from: ENV['OUTGOING_EMAIL']}
 
   config.action_mailer.asset_host = "localhost"
 

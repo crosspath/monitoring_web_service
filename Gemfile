@@ -26,3 +26,4 @@ end
 # release specific
 gem 'sendgrid-ruby' # SendGrid, Heroku addon for email sending
 gem 'dotenv-rails', group: [:development, :test]
+gem 'uglifier', group: [:production]

@@ -2,7 +2,7 @@
 class UserMailer < ActionMailer::Base
   layout 'mailer'
 
-  # http://localhost:5000/rails/mailers/status_mail
+  # http://localhost:5000/rails/mailers/mailer/status_mail
   def status_mail(domain, to)
     @failed_tests = domain.failed_tests || []
     @passed_tests = domain.passed_tests || []

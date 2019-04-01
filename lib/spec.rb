@@ -27,7 +27,7 @@ class Spec
   class Domain
     attr_reader :domain, :redis, :failed_tests, :passed_tests, :spec_file, :urls, :options
 
-    TIMEOUT = 3
+    TIMEOUT = 5
     RE_TOKEN = /<input\s+name=[\'\"]authenticity_token[\'\"]\s+type=[\'\"]hidden[\'\"]\s+value=[\'\"](?<token>.*?)[\'\"]\s*\/?>/
 
     def initialize(url, redis, options = {})

@@ -30,8 +30,9 @@ module MonitoringWebService
     config.i18n.default_locale = :ru
     config.i18n.fallbacks = [I18n.default_locale]
 
-    # config.autoload_paths += Dir[Rails.root.join('lib')]
-    config.autoload_paths += [Rails.root.join('lib').to_s]
+    more_paths = [Rails.root.join('lib').to_s]
+    config.autoload_paths += more_paths
+    config.eager_load_paths += more_paths
     
     # custom configs
     config.app    = config_for :application

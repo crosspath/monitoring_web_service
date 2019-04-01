@@ -3,10 +3,10 @@
 # Желательно перенаправить stdout в лог-файл. Пример: rails r 'HttpRequests.new.perform' &> log/status.log
 class HttpRequests
   include Sidekiq::Worker
-  sidekiq_options :retry => 2
+  sidekiq_options retry: 2
 
   def perform(options = {})
-    files = Dir[Rails.root.join('app', 'specs', '*.rb')]
+    files = Dir[Rails.root.join('specs', '*.rb')]
     files.each do |file|
       begin
         spec = Spec.new(file, options)
