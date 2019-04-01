@@ -17,9 +17,11 @@ class NewsController < ApplicationController
   end
 
   def edit
+    @include_csrf_tags = true
   end
 
   def new
+    @news = News.new(date: Date.today)
   end
 
   def create

@@ -1,19 +1,14 @@
-@import "variables"
-@import "mixins"
+@import "variables";
 
 .container {
-  @media (min-width: 1440px) {
+  @media screen and (min-width: 1440px) {
     width: 1360px;
   }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
-  min-width: 1280px;
 }
 body {
-  overflow-y: scroll;
   margin-bottom: 60px;
 }
 
@@ -89,6 +84,7 @@ a {
 }
 .service-messages__message {
   border-bottom: 1px solid $grey-light;
+  padding-bottom: 1em;
 }
 .service-messages__date {
   color: $grey-normal;
@@ -101,5 +97,24 @@ a {
 
   &:hover {
     color: $blue-light;
+  }
+}
+
+.admin-link {
+  display: inline-block;
+  
+  & + .admin-link {
+    margin-left: 0.5em;
+  }
+}
+a.admin-link,
+.admin-link > a {
+  border: 2px solid $grey-light;
+  border-radius: 0.4em;
+  display: inline-block;
+  padding: 0.4em;
+
+  &:hover {
+    border-color: $blue-light;
   }
 }

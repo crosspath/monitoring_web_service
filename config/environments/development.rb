@@ -33,5 +33,4 @@ Rails.application.configure do
 
   config.reload_classes_only_on_change = true
   config.action_dispatch.perform_deep_munge = false
-  config.i18n.fallbacks = true
 end

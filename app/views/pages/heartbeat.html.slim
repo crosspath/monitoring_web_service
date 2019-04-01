@@ -1,27 +1,27 @@
 .heartbeat-page.container
-  %h1.heartbeat-page__header= t(".heartbeat_header", default: "Сетевая доступность серверов, сервисов и подсистем портала")
+  h1.heartbeat-page__header
+    = t(".heartbeat_header", default: "Сетевая доступность серверов, сервисов и подсистем портала")
   .services
     - @specs.each do |result|
       - percent = result.percent
       .services__item
         - img_class = percent == 100 ? 'services__img--available' : 'services__img--not-available'
-        .services__img{class: img_class}
+        .services__img class=img_class
         .services__name= result.name
         .services__status-text
           - if percent == 0
-            Работа приостановлена
+            | Работа приостановлена
           - elsif percent.nil?
-            Нет данных
+            | Нет данных
           - else
             = "Работает на #{percent}%"
   .service-messages
-    %h2.service-messages__header= t(".errors_message", default: "Сообщения о неполадках")
+    h2.service-messages__header= t(".errors_message", default: "Сообщения о неполадках")
 
     - if @news.present?
       - @news.each do |news|
         = render partial: 'news/news', locals: {news: news}
 
     - else
-      -#Если нет сообщений
       .service-messages__empty
-        %p В настоящие время сообщения о неполадках отсутствуют.
+        p В настоящие время сообщения о неполадках отсутствуют.
