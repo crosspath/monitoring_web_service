@@ -1,5 +1,5 @@
 - if @news.present?
-  .services-messages
+  .service-messages
     - @news.each do |news|
       = render partial: 'news/news', locals: {admin: true, news: news}
 

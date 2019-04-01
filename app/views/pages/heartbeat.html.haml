@@ -4,7 +4,8 @@
     - @specs.each do |result|
       - percent = result.percent
       .services__item
-        .services__status-img{class: "services__status-img_available_#{percent == 100 ? 'yes' : 'no'}"}
+        - img_class = percent == 100 ? 'services__img--available' : 'services__img--not-available'
+        .services__img{class: img_class}
         .services__name= result.name
         .services__status-text
           - if percent == 0
@@ -13,8 +14,8 @@
             Нет данных
           - else
             = "Работает на #{percent}%"
-  .services-messages
-    %h2.services-messages__header= t(".errors_message", default: "Сообщения о неполадках")
+  .service-messages
+    %h2.service-messages__header= t(".errors_message", default: "Сообщения о неполадках")
 
     - if @news.present?
       - @news.each do |news|
@@ -22,5 +23,5 @@
 
     - else
       -#Если нет сообщений
-      .services-messages__item.services-messages__item_message_no
+      .service-messages__empty
         %p В настоящие время сообщения о неполадках отсутствуют.

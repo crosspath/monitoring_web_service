@@ -1,5 +1,6 @@
 class News
   include ActiveModel::Model
+  
   attr_reader :id
   attr_accessor :title, :content, :date
   

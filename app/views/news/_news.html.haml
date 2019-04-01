@@ -1,8 +1,8 @@
 - admin ||= false
-.services-messages__item.services-messages__item_message_yes
-  %h3.services-messages__title= news.title
+.service-messages__message
+  %h3.service-messages__title= news.title
   %pre= markdown news.content
-  .services-messages__date= news.date
+  .service-messages__date= news.date
   - if admin
     = link_to 'show', news_path(news.id)
     = link_to 'edit', edit_news_path(news.id)

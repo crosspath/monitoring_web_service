@@ -1,5 +1,8 @@
 class NewsController < ApplicationController
-  http_basic_authenticate_with name: ENV['ADMIN_USER'], password: ENV['ADMIN_PASSWORD']
+  http_basic_authenticate_with(
+    name:     name: ENV['ADMIN_USER'],
+    password: password: ENV['ADMIN_PASSWORD']
+  )
 
   before_action -> { @id = params[:id] }
   before_action -> { @news = NewsRepo.load_news }, only: :index

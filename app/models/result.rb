@@ -1,5 +1,6 @@
 class Result
   include ActiveModel::Model
+  
   attr_accessor :name, :failed_tests, :passed_tests
   
   def percent

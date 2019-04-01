@@ -1,0 +1,105 @@
+@import "variables"
+@import "mixins"
+
+.container {
+  @media (min-width: 1440px) {
+    width: 1360px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  min-width: 1280px;
+}
+body {
+  overflow-y: scroll;
+  margin-bottom: 60px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $main-font;
+}
+a {
+  text-decoration: none;
+  color: #000;
+
+  &:hover, &:focus {
+    outline: none;
+    text-decoration: none;
+    color: #000;
+  }
+}
+
+.heartbeat-page__header {
+  text-align: center;
+  font-family: $main-fontLight;
+  margin-top: 50px;
+  margin-bottom: 85px;
+}
+.services {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.services__item {
+  text-align: center;
+  margin-bottom: 50px;
+  display: inline-block;
+  width: 265px;
+  margin-right: 10px;
+}
+.services__img {
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+  background: image-url('status-sprite.png') no-repeat;
+
+  &.services__img--available {
+    background-position: 0 0;
+  }
+  &.services__img--not-available {
+    background-position: -71px 0;
+  }
+}
+.services__name {
+  font: 22px/25px $main-font;
+  margin-top: 35px;
+  height: 75px;
+}
+
+.service-messages {
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+.service-messages__header {
+  text-align: center;
+  font-family: $main-fontLight;
+  margin-bottom: 60px;
+}
+.service-messages__title {
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+.service-messages__empty {
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
+.service-messages__message {
+  border-bottom: 1px solid $grey-light;
+}
+.service-messages__date {
+  color: $grey-normal;
+  margin: 20px 0;
+}
+
+.email-link {
+  font-family: $main-font;
+  color: $blue-light;
+
+  &:hover {
+    color: $blue-light;
+  }
+}
