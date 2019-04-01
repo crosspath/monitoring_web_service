@@ -1,11 +1,13 @@
 source 'https://rubygems.org'
 ruby '>= 2.4'
 
-gem 'rails',      '>= 5.2.0'
+gem 'rails', github: "rails/rails", branch: "5-2-stable"
 gem 'sassc-rails'
 
-gem 'haml'
-gem 'haml-rails'
+# template engine: slim
+gem 'slim'
+
+gem 'puma'
 gem 'sidekiq'
 gem 'httparty'
 gem 'redis'
