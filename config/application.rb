@@ -31,13 +31,11 @@ module MonitoringWebService
     config.i18n.fallbacks = [I18n.default_locale]
 
     more_paths = [Rails.root.join('lib').to_s]
-    config.autoload_paths += more_paths
+    config.autoload_paths   += more_paths
     config.eager_load_paths += more_paths
     
     # custom configs
-    config.app    = config_for :application
     config.admins = {emails: ENV['ADMIN_EMAILS'].split(';').map(&:strip)}
-    config.redis  = config_for :redis
-    config.specs  = config_for :specs
+    config.specs  = config_for '../specs/specs'
   end
 end

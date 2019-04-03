@@ -1,7 +1,7 @@
 - admin ||= false
 .service-messages__message
   h3.service-messages__title= news.title
-  pre= markdown news.content
+  = markdown news.content
   .service-messages__date= news.date
   - if admin
     = link_to 'show', news_path(news.id), class: 'admin-link'

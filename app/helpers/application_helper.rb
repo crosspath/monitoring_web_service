@@ -11,7 +11,7 @@ module ApplicationHelper
     autolink: true
   }
   
-  MARKDOWN_ALLOWED_TAGS = %w(br p b i strong a li ul ol video source)
+  MARKDOWN_ALLOWED_TAGS = %w(br p b i strong a li ul ol video source pre blockquote)
   MARKDOWN_ALLOWED_ATTRIBUTES = %w(
     preload controls poster type src style class name href title alt height width
   )

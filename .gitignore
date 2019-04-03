@@ -1,10 +1,9 @@
 log
 spec/tmp
 tmp
+.rspec
 
 .directory
-
-.rspec
 
 # TODO Comment out these rules if you are OK with secrets being uploaded to the repo
 config/initializers/secret_token.rb
@@ -18,5 +17,5 @@ config/secrets.yml
 .bundle
 
 # Your tests
-app/specs
-!app/specs/.keep
+specs
+!specs/specs.yml.template
