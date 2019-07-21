@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '>= 2.4'
 
-gem 'rails', github: "rails/rails", branch: "5-2-stable"
+gem 'rails', '~> 5.2'
 gem 'sassc-rails'
 
 # template engine: slim

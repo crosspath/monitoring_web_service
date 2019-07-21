@@ -2,18 +2,20 @@ class Spec
   attr_reader :redis, :spec_file, :domains, :options
 
   def initialize(file, options = {})
-    @options = {redis: true, domain: {}}.merge options
-    @redis = @options[:redis] && RedisInstance.connect
-    @spec_file = file.sub "#{Rails.root}/", ''
-    @domains = []
+    @options   = {redis: true, domain: {}}.merge(options)
+    @redis     = @options[:redis] && RedisInstance.connect
+    @spec_file = file.sub("#{Rails.root}/", '')
+    @domains   = []
+
     instance_eval(File.read(file))
   end
 
   # For DSL
   def domain(url, &block)
-    key = "results~#{@spec_file}~#{url}"
-    options = {redis_key: key}.merge(@options[:domain])
+    key         = "results~#{@spec_file}~#{url}"
+    options     = {redis_key: key}.merge(@options[:domain])
     spec_domain = Spec::Domain.new(url, @redis, options)
+
     @domains << {domain: spec_domain, block: block}
   end
 
@@ -28,20 +30,23 @@ class Spec
     attr_reader :domain, :redis, :failed_tests, :passed_tests, :spec_file, :urls, :options
 
     TIMEOUT = 5
-    RE_TOKEN = /<input\s+name=[\'\"]authenticity_token[\'\"]\s+type=[\'\"]hidden[\'\"]\s+value=[\'\"](?<token>.*?)[\'\"]\s*\/?>/
+    RE_TOKEN = /<input\s+[^>]*name=[\'\"]authenticity_token[\'\"].*\/?>/
+    RE_TOKEN_VALUE = /\s+value=[\'\"](?<token>.*?)[\'\"]\s*/
 
     def initialize(url, redis, options = {})
-      @options = {send_mails: true, emulate: false}.merge options
-      @domain = url
-      @redis = redis
+      @options = {send_mails: true, emulate: false}.merge(options)
+      @domain  = url
+      @redis   = redis
+
       @failed_tests ||= []
       @passed_tests ||= []
-      @urls ||= []
+      @urls         ||= []
     end
 
     def cached_results
       results = @redis && @redis.get(options[:redis_key])
       results = results ? JSON.parse(results) : {}
+
       results['failed_tests'] ||= []
       results['passed_tests'] ||= []
       results
@@ -55,7 +60,7 @@ class Spec
     def save_result_and_send_mail
       return if @options[:emulate]
 
-      results = cached_results
+      results     = cached_results
       new_results = {failed_tests: @failed_tests, passed_tests: @passed_tests}.deep_stringify_keys
 
       unless results == new_results
@@ -77,29 +82,40 @@ class Spec
       return if @options[:emulate]
       score = 0
       begin
-        url = domain_url(url)
-        prev = @redis && @redis.get(url)
+        url     = domain_url(url)
+        prev    = @redis && @redis.get(url)
         options = {timeout: TIMEOUT}
         options[:cookies] = @cookie if instance_variable_defined?(:@cookie)
 
         begin
-          @response = yield url, options
+          @response = yield(url, options)
         rescue => e
-          raise e unless e.message.start_with?('Connection refused') || e.message.include?('Net::ReadTimeout')
-          @response = yield url, options # ещё одна попытка
+          unless e.message.start_with?('Connection refused') || e.message.include?('Net::ReadTimeout')
+            raise e
+          end
+          @response = yield(url, options) # ещё одна попытка
         end
 
-        @cookie = [@response.headers["set-cookie"].split('=', 2)].to_h if @response.headers.key?("set-cookie")
-        result = func.nil? ? success? : func.call
+        if @response.headers.key?("set-cookie")
+          @cookie = [@response.headers["set-cookie"].split('=', 2)].to_h
+        end
+        result = func ? func.call : success?
         raise RuntimeError, "Does not satisfy conditions" unless result
 
-        @passed_tests << {url: url, code: @response && "#{@response.code} #{@response.message}"}
-        @redis && @redis.set(url, '1') if prev != '1' # тест пройден успешно
+        @passed_tests << {
+          url:  url,
+          code: @response && "#{@response.code} #{@response.message}"
+        }
+        @redis.set(url, '1') if prev != '1' && @redis # тест пройден успешно
       rescue => e
         score += 1
         # записать результат в память. если тест раньше проходил успешно, то отправить письмо админу
-        @failed_tests << {url: url, message: e.message, code: @response && "#{@response.code} #{@response.message}"}
-        @redis && @redis.set(url, '0') if prev != '0'
+        @failed_tests << {
+          url:     url,
+          message: e.message,
+          code:    @response && "#{@response.code} #{@response.message}"
+        }
+        @redis.set(url, '0') if prev != '0' && @redis
       end
       score == 0
     end
@@ -128,16 +144,29 @@ class Spec
 
     def auth(options = {})
       options.symbolize_keys!
-      form_url = options[:form_url]
+      form_url  = options[:form_url]
       login_url = options[:login_url]
-      cred = options[:credentials]
+      cred      = options[:credentials]
 
       if visit(form_url)
-        token = @response.body.match(RE_TOKEN)
-        token_value = token['token']
+        token_input_matches = @response.body.match(RE_TOKEN)
+        token_value         = nil
 
-        send_form(login_url, cred.merge(authenticity_token: token_value))
+        if token_input_matches
+          value_matches = token_input_matches[0].match(RE_TOKEN_VALUE)
+          token_value   = value_matches['token']
+
+          if token_value
+            send_form(login_url, cred.merge(authenticity_token: token_value))
+          end
+        end
+
+        unless token_value
+          raise RuntimeError, "Cannot find authenticity_token"
+        end
       end
+
+      true
     end
   end
 end
