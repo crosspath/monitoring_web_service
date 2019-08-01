@@ -27,7 +27,7 @@ class Spec
   end
 
   class Domain
-    attr_reader :domain, :redis, :failed_tests, :passed_tests, :spec_file, :urls, :options
+    attr_reader :domain, :redis, :failed_tests, :passed_tests, :response, :urls, :options
 
     TIMEOUT = 5
     RE_TOKEN = /<input\s+[^>]*name=[\'\"]authenticity_token[\'\"].*\/?>/
