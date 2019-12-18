@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
-ruby '>= 2.4'
 
-gem 'rails', '~> 5.2'
-gem 'sassc-rails'
+ruby '2.5.1'
+
+gem 'rails', github: "rails/rails", branch: "6-0-stable"
+gem 'sass-rails'
 
 # template engine: slim
 gem 'slim'
@@ -23,7 +24,13 @@ group :test do
   gem 'rspec'
 end
 
-# release specific
-gem 'sendgrid-ruby' # SendGrid, Heroku addon for email sending
-gem 'dotenv-rails', group: [:development, :test]
-gem 'uglifier', group: [:production]
+group :development, :test do
+  gem 'dotenv-rails'
+end
+
+group :production do
+  # SendGrid, Heroku addon for sending emails
+  gem 'sendgrid-ruby'
+  
+  gem 'uglifier'
+end
