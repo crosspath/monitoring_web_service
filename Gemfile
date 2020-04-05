@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.5.1'
 
-gem 'rails', github: "rails/rails", branch: "6-0-stable"
+gem 'rails', '~> 6.0.0'
 gem 'sass-rails'
 
 # template engine: slim

@@ -7,9 +7,10 @@ class HttpRequests
   sidekiq_options retry: 2
 
   def perform(options = {})
-    files = Dir[Rails.root.join('specs', '*.rb')]
-    files.each do |file|
+    specs = Rails.configuration.specs.keys
+    specs.each do |spec_name|
       begin
+        file = Rails.root.join('specs', "#{spec_name}.rb")
         spec = Spec.new(file, options)
         spec.run
       rescue => e

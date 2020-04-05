@@ -1,4 +1,5 @@
-require_relative '../../lib/redis_facade'
+require 'redis'
+require_relative '../../lib/redis_instance'
 
 RSpec.describe RedisInstance do
   it 'returns Redis instance on connect' do

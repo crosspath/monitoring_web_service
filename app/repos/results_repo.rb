@@ -6,10 +6,8 @@ class ResultsRepo
       
       specs.map do |spec_name, spec_title|
         result = Result.new(name: spec_title)
-        if results_by_spec[spec_name]
-          results_by_spec[spec_name].each do |row|
-            result.add(row)
-          end
+        (results_by_spec[spec_name.to_s] || []).each do |row|
+          result.add(row)
         end
         result
       end
