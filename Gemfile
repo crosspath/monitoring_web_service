@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.5.1'
+ruby '2.7.1'
 
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.1'
 gem 'sass-rails'
 
 # template engine: slim
