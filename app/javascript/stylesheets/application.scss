@@ -1,4 +1,4 @@
-@import "variables";
+@import './variables';
 
 .container {
   @media screen and (min-width: 1440px) {
@@ -47,7 +47,7 @@ a {
   width: 70px;
   height: 70px;
   display: inline-block;
-  background: image-url('status-sprite.png') no-repeat;
+  background: url('../images/status-sprite.png') no-repeat;
 
   &.services__img--available {
     background-position: 0 0;

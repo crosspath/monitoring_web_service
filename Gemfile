@@ -1,18 +1,15 @@
 source 'https://rubygems.org'
 
-ruby '2.7.1'
+ruby '3.0.1'
 
-gem 'rails', '~> 6.1'
-gem 'sass-rails'
-
-# template engine: slim
-gem 'slim'
-
-gem 'puma'
-gem 'sidekiq'
 gem 'httparty'
+gem 'puma'
+gem 'rails', '~> 6.1'
 gem 'redis'
 gem 'redcarpet'
+gem 'sidekiq'
+gem 'slim'
+gem 'webpacker'
 
 group :development do
   gem 'better_errors'
@@ -29,8 +26,5 @@ group :development, :test do
 end
 
 group :production do
-  # SendGrid, Heroku addon for sending emails
-  gem 'sendgrid-ruby'
-  
-  gem 'uglifier'
+  gem 'sendgrid-ruby' # SendGrid, Heroku addon for sending emails
 end

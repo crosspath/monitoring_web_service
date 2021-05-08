@@ -15,8 +15,16 @@ config/secrets.yml
 
 ## Environment normalization
 .bundle
-vendor/bundle
+/vendor/*
+!/vendor/.keep
 
 # Your tests
 specs
 !specs/specs.yml.template
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

@@ -2,11 +2,12 @@ doctype html
 html
   head
     title Monitoring Web Service
+    meta charset="utf-8"
     meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=2, width=device-width, user-scalable=yes"
-    
-    = stylesheet_link_tag    'application', media: 'all'
-    = javascript_include_tag 'application'
-    
+
+    = javascript_pack_tag 'application'
+    = stylesheet_pack_tag 'application', media: 'all'
+
     = csrf_meta_tags if defined?(@include_csrf_tags) && @include_csrf_tags
   body
     = yield

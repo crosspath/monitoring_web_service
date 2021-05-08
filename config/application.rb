@@ -6,7 +6,7 @@ require "active_model/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
-require "sprockets/railtie"
+# require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -33,9 +33,11 @@ module MonitoringWebService
     more_paths = [Rails.root.join('lib').to_s]
     config.autoload_paths   += more_paths
     config.eager_load_paths += more_paths
-    
+
     # custom configs
     config.admins = {emails: ENV['ADMIN_EMAILS'].split(';').map(&:strip)}
     config.specs  = config_for '../specs/specs'
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
